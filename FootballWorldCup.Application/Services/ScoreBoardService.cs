@@ -33,5 +33,20 @@ namespace FootballWorldCup.Application.Services
             }
         }
 
+        public void FinishGame(string HomeTeam, string AwayTeam)
+        {
+            if (_scoreBoard.Games != null && _scoreBoard.Games.Count > 0)
+            {
+                if (!string.IsNullOrEmpty(HomeTeam) && !string.IsNullOrEmpty(AwayTeam))
+                {
+                    var game = _scoreBoard.Games.Where(game => game.HomeTeam.Equals(HomeTeam) && game.AwayTeam.Equals(AwayTeam)).FirstOrDefault();
+                    if (game != null)
+                    {
+                        _scoreBoard.Games.Remove(game);
+                    }
+                }
+            }
+        }
+
     }
 }
