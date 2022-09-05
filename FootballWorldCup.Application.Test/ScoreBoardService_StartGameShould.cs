@@ -1,7 +1,6 @@
 using FootballWorldCup.Application.Models;
 using FootballWorldCup.Application.Services;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace FootballWorldCup.Application.Test
@@ -33,7 +32,7 @@ namespace FootballWorldCup.Application.Test
         {
             _scoreBoardService.StartGame(HomeTeam, AwayTeam);
 
-            Assert.True(!_scoreBoard.Games.Any(game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam)));
+            Assert.DoesNotContain(_scoreBoard.Games, game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam));
         }
 
         [Theory]
@@ -59,7 +58,7 @@ namespace FootballWorldCup.Application.Test
         {
             _scoreBoardService.StartGame("HomeTeam", "AwayTeam");
 
-            Assert.Single(_scoreBoard.Games.Where(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam")));
+            Assert.Single(_scoreBoard.Games, game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam"));
         }
 
         [Fact]
@@ -67,12 +66,10 @@ namespace FootballWorldCup.Application.Test
         {
             _scoreBoardService.StartGame("HomeTeam", "AwayTeam");
 
-            var game = _scoreBoard.Games.FirstOrDefault(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam"));
+            var game = _scoreBoard.Games.Find(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam"));
 
             Assert.True(game != null && game.HomeTeamScore == 0 && game.AwayTeamScore == 0);
         }
-
-
 
     }
 }
