@@ -62,6 +62,17 @@ namespace FootballWorldCup.Application.Test
             Assert.Single(_scoreBoard.Games.Where(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam")));
         }
 
+        [Fact]
+        public void SetTheInitialGameScore0To0_WhenANewGameIsAdded()
+        {
+            _scoreBoardService.StartGame("HomeTeam", "AwayTeam");
+
+            var game = _scoreBoard.Games.FirstOrDefault(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam"));
+
+            Assert.True(game != null && game.HomeTeamScore == 0 && game.AwayTeamScore == 0);
+        }
+
+
 
     }
 }
