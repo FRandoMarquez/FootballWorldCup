@@ -26,7 +26,10 @@ namespace FootballWorldCup.Application.Services
         {
             if (!string.IsNullOrEmpty(HomeTeam) && !string.IsNullOrEmpty(AwayTeam))
             {
-                
+                if (!_scoreBoard.Games.Any(game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam)))
+                {
+                    _scoreBoard.Games.Add(new Game { HomeTeam = HomeTeam, AwayTeam = AwayTeam });
+                }
             }
         }
 

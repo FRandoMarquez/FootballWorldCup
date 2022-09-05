@@ -1,6 +1,7 @@
 using FootballWorldCup.Application.Models;
 using FootballWorldCup.Application.Services;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace FootballWorldCup.Application.Test
@@ -32,8 +33,35 @@ namespace FootballWorldCup.Application.Test
         {
             _scoreBoardService.StartGame(HomeTeam, AwayTeam);
 
-            Assert.True(_scoreBoard.Games.Find(game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam)) == null);
+            Assert.True(!_scoreBoard.Games.Any(game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam)));
         }
+
+        [Theory]
+        [InlineData("HomeTeam", "AwayTeamExists")]
+        [InlineData("HomeTeamExists", "AwayTeam")]
+        [InlineData("HomeTeamExists", "AwayTeamExists")]
+        public void NotAddAGame_WhenInputTeamIsAlreadyPlayingAGame(string HomeTeam, string AwayTeam)
+        {
+
+            _scoreBoard.Games.Add(new Game
+            {
+                HomeTeam = "HomeTeamExists",
+                AwayTeam = "AwayTeamExists"
+            });
+
+            _scoreBoardService.StartGame(HomeTeam, AwayTeam);
+
+            Assert.Single(_scoreBoard.Games);
+        }
+
+        [Fact]
+        public void AddANewGameToScoreBoard_WhenInputTeamsAreNOTPlayingAGame()
+        {
+            _scoreBoardService.StartGame("HomeTeam", "AwayTeam");
+
+            Assert.Single(_scoreBoard.Games.Where(game => game.HomeTeam.Equals("HomeTeam") && game.AwayTeam.Equals("AwayTeam")));
+        }
+
 
     }
 }
