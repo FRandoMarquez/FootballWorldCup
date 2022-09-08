@@ -161,8 +161,5 @@ namespace FootballWorldCup.Application.Test
             Assert.True(currentGame.HomeTeamScore == HomeTeamScore && currentGame.AwayTeamScore == AwayTeamScore);
         }
 
-
-
-
     }
 }
