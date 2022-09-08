@@ -70,7 +70,7 @@ namespace FootballWorldCup.Application.Services
             }
         }
 
-        public ScoreBoard GetGamesOrderByScore()
+        public ScoreBoard GetScoreBoardSummary()
         {
             if (_scoreBoard == null || _scoreBoard.Games == null)
             {
@@ -79,7 +79,9 @@ namespace FootballWorldCup.Application.Services
                     Games = new List<Game>()
                 };
             }
-            _scoreBoard.Games.Sort();
+            _scoreBoard.Games = _scoreBoard.Games.OrderByDescending(game => game.HomeTeamScore + game.AwayTeamScore)
+                .ThenByDescending(game => game.StartDate).ToList();
+
             return _scoreBoard;
         }
 

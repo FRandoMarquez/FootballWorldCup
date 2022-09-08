@@ -5,7 +5,7 @@ using Xunit;
 
 namespace FootballWorldCup.Application.Test
 {
-    public class ScoreBoardService_GetGamesSummaryShould
+    public class ScoreBoardService_GetScoreBoardSummaryShould
     {
 
         [Fact]
@@ -14,7 +14,7 @@ namespace FootballWorldCup.Application.Test
 
             var scoreBoardService = new ScoreBoardService(null);
 
-            var scoreBoard = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoard = scoreBoardService.GetScoreBoardSummary();
 
             Assert.Empty(scoreBoard.Games);
         }
@@ -26,7 +26,7 @@ namespace FootballWorldCup.Application.Test
             var scoreBoard = new ScoreBoard();
             var scoreBoardService = new ScoreBoardService(scoreBoard);
 
-            var scoreBoardResult = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoardResult = scoreBoardService.GetScoreBoardSummary();
 
             Assert.Empty(scoreBoardResult.Games);
         }
@@ -57,7 +57,7 @@ namespace FootballWorldCup.Application.Test
             };
             var scoreBoardService = new ScoreBoardService(scoreBoard);
 
-            var scoreBoardResult = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoardResult = scoreBoardService.GetScoreBoardSummary();
 
             Assert.Equal(scoreBoard.Games.Count, scoreBoardResult.Games.Count);
         }
@@ -109,7 +109,7 @@ namespace FootballWorldCup.Application.Test
             scoreBoardOrdered.Games.Add(firstGame);
             scoreBoardOrdered.Games.Add(secondGame);
 
-            var scoreBoardResult = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoardResult = scoreBoardService.GetScoreBoardSummary();
 
             Assert.True(scoreBoardResult.Games[0].Equals(scoreBoardOrdered.Games[0]) &&
                         scoreBoardResult.Games[1].Equals(scoreBoardOrdered.Games[1]) &&
@@ -153,7 +153,7 @@ namespace FootballWorldCup.Application.Test
 
 
             var scoreBoardService = new ScoreBoardService(initScoreBoard);
-            var scoreBoardResult = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoardResult = scoreBoardService.GetScoreBoardSummary();
 
             var scoreBoardOrdered = new ScoreBoard()
             {
@@ -208,7 +208,7 @@ namespace FootballWorldCup.Application.Test
 
 
             var scoreBoardService = new ScoreBoardService(initScoreBoard);
-            var scoreBoardResult = scoreBoardService.GetGamesOrderByScore();
+            var scoreBoardResult = scoreBoardService.GetScoreBoardSummary();
 
             var scoreBoardOrdered = new ScoreBoard()
             {
