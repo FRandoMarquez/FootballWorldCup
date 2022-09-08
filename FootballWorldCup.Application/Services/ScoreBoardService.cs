@@ -14,7 +14,10 @@ namespace FootballWorldCup.Application.Services
 
         public ScoreBoardService()
         {
-            _scoreBoard = new ScoreBoard();
+            _scoreBoard = new ScoreBoard()
+            {
+                Games = new List<Game>()
+            };
         }
 
         public ScoreBoardService(ScoreBoard scoreBoard)
@@ -65,6 +68,19 @@ namespace FootballWorldCup.Application.Services
                     }
                 }
             }
+        }
+
+        public ScoreBoard GetGamesOrderByScore()
+        {
+            if (_scoreBoard == null || _scoreBoard.Games == null)
+            {
+                return new ScoreBoard()
+                {
+                    Games = new List<Game>()
+                };
+            }
+            _scoreBoard.Games.Sort();
+            return _scoreBoard;
         }
 
     }
