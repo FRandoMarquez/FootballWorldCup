@@ -27,7 +27,7 @@ namespace FootballWorldCup.Application.Services
 
         public void StartGame(string HomeTeam, string AwayTeam)
         {
-            if (!string.IsNullOrEmpty(HomeTeam) && !string.IsNullOrEmpty(AwayTeam))
+            if (_scoreBoard != null && !string.IsNullOrEmpty(HomeTeam) && !string.IsNullOrEmpty(AwayTeam))
             {
                 if (!_scoreBoard.Games.Any(game => game.HomeTeam.Equals(HomeTeam) || game.AwayTeam.Equals(AwayTeam)))
                 {
@@ -38,7 +38,7 @@ namespace FootballWorldCup.Application.Services
 
         public void FinishGame(string HomeTeam, string AwayTeam)
         {
-            if (_scoreBoard.Games != null && _scoreBoard.Games.Count > 0)
+            if (_scoreBoard != null && _scoreBoard.Games != null && _scoreBoard.Games.Count > 0)
             {
                 if (!string.IsNullOrEmpty(HomeTeam) && !string.IsNullOrEmpty(AwayTeam))
                 {
@@ -53,7 +53,7 @@ namespace FootballWorldCup.Application.Services
 
         public void UpdateScore(Game gameToUpdate)
         {
-            if (_scoreBoard.Games != null && _scoreBoard.Games.Count > 0)
+            if (_scoreBoard != null && _scoreBoard.Games != null && _scoreBoard.Games.Count > 0)
             {
                 if (gameToUpdate != null && !string.IsNullOrEmpty(gameToUpdate.HomeTeam) && !string.IsNullOrEmpty(gameToUpdate.AwayTeam))
                 {

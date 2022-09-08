@@ -23,6 +23,16 @@ namespace FootballWorldCup.Application.Test
         }
 
 
+        [Fact]
+        public void NotAddAGame_WhenScoreBoardIsNull()
+        {
+            _scoreBoard = null;
+            _scoreBoardService = new ScoreBoardService(_scoreBoard);
+            _scoreBoardService.StartGame("HomeTeam", "AwayTeam");
+
+            Assert.Null(_scoreBoard);
+        }
+
         [Theory]
         [InlineData(null, null)]
         [InlineData(null, "")]

@@ -24,6 +24,18 @@ namespace FootballWorldCup.Application.Test
 
 
         [Fact]
+        public void NotUpdateAGameScore_WhenScoreboardIsNull()
+        {
+
+            _scoreBoard = null;
+            _scoreBoardService = new ScoreBoardService(_scoreBoard);
+            _scoreBoardService.UpdateScore(null);
+
+            Assert.Null(_scoreBoard);
+        }
+
+
+        [Fact]
         public void NotUpdateAGameScore_WhenGameInputIsNull()
         {
 
